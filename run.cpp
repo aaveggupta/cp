@@ -27,10 +27,6 @@ signed main()
             s[index] = '*';
         }
 
-        if (p[0] > p[p.length() - 1]) {
-            reverse(p.begin(), p.end());
-        }
-
         sort(s.begin(), s.end());
         int f = 0;
 
