@@ -9,44 +9,43 @@ typedef long long ll;
     freopen("output.txt", "w", stdout);
 #define FIO ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
  
+
  
 signed main() 
 {
     OJ; 
     FIO;
+
+    vector<int> A {0, 3, 7, 6, 4, 0, 5, 5, 5};
     
-    int t;
-    cin >> t;
-
-    while (t --) {
-        string s, p;
-        cin >> s >> p;
-
-        for (int i = 0; i < p.length(); i++) {
-            int index = s.find(p[i]);
-            s[index] = '*';
+    int sum = 0;
+    A[A.size() - 1] ++;
+    for (int i = A.size() - 1; i >= 1; i--) {
+        if (A[i] >= 10) {
+            int e = A[i] / 10;
+            A[i] = A[i] % 10;
+            A[i - 1] += e;
         }
-
-        sort(s.begin(), s.end());
-        int f = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s[i] != '*') {
-                if (s[i] > p[0] && f == 0) {
-                    cout << p << s[i];
-                    f = 1;
-                } else {
-                    cout << s[i];
-                }
-            }
+    }
+    if (A[0] >= 10) {
+        int e = A[0] / 10;
+        A[0] = A[0] % 10;
+        A.insert(A.begin(), e);
+    }
+    vector<int> B;
+    int f = 0;
+    for (int i = 0; i < A.size(); i++) {
+        if (A[i] == 0 && f == 0) {
+            continue;
+        } else {
+            B.push_back(A[i]);
+            f = 1;
         }
-
-        if (f == 0)
-        cout << p;
-
-        cout << "\n";
     }
 
+    for (auto i : B) {
+        cout << i << " ";
+    }
 
     
 }
